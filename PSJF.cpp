@@ -67,11 +67,8 @@ void PSJFdisplay(int nop,int qt){
         }
         i=j;
         if(moveLast==true){
-     //       cout<<"moving "<<PSJFb[f].pname<<" to "<<r<<"\n";
              sort(PSJFb+f,PSJFb+r,PSJFbtimesort);    
-            // PSJFb[r]=PSJFb[f];
-            // f++;
-            // r++;
+
         }
         j=f;
         
@@ -105,10 +102,14 @@ void PSJFdisplay(int nop,int qt){
     }
     //end sort
     
-    ttime+=PSJFa[i].btime;
+    //total up burst time for each context switch
     for(i=0;i<k-1;i++){
+    	cout << "PNAME :"<< PSJFc[i].pname << endl;
         if(PSJFc[i].pname==PSJFc[i+1].pname){
+
+			PSJFc[i+1].btime;
             PSJFc[i].btime+=PSJFc[i+1].btime;
+
             for(j=i+1;j<k-1;j++)
                 PSJFc[j]=PSJFc[j+1];
             k--;
@@ -116,7 +117,6 @@ void PSJFdisplay(int nop,int qt){
         }
     }
     
-
 
     
     // k == number of times process switches
