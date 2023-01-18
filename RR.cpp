@@ -127,7 +127,7 @@ void RRdisplay(int nop,int qt){
     
      cout<<"\nGantt Chart\n";
     rtime=0;
-    for (i=0; i<k+1&&i<20; i++){
+    for (i=0; i<k+1&&i<100; i++){
         if(i!=k)
             cout<<"|   "<< RRc[i].process << "   "; 
         rtime+=RRc[i].burst;
@@ -139,12 +139,11 @@ void RRdisplay(int nop,int qt){
     
     cout<<"\n";
     rtime=0;
-    for (i=0; i<k+1&&i<20; i++){
+    for (i=0; i<k+1&&i<100; i++){
         cout << rtime << "\t";
         if (i == k){
 	    break;
 		}else{
-        tArray[i]=rtime;
         rtime+=RRc[i].burst; 
 		}
     }
@@ -159,6 +158,5 @@ void RRmain(){
     cin>>qt;
     insertRR(nop);
     RRdisplay(nop,qt);
-    system("pause");
 
 }
