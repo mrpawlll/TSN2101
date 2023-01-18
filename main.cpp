@@ -17,5 +17,7 @@ int main(){
 	cout << "\n--------------------------------------\n";
 	RRmain();
 
+	system("pause");
+
 return 0;
 }
