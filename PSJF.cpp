@@ -7,7 +7,7 @@ using namespace std;
 static struct PSJFnode{
     char pname;
     int btime;
-    int atime;
+    int atime=0;
     int ctime=0;
 	int wtime;
 }PSJFa[1000],PSJFb[1000],PSJFc[1000];
@@ -28,22 +28,53 @@ void insertPSJF(int n){
 }
 
 //function to compare burst time
-bool PSJFbtimesort(PSJFnode PSJFa,PSJFnode PSJFb){
+bool PSJFbtimeSort(PSJFnode PSJFa,PSJFnode PSJFb){
     return PSJFa.btime < PSJFb.btime; 
 }
 
 bool PSJFatimeSort(PSJFnode PSJFa,PSJFnode PSJFb){
     return PSJFa.atime < PSJFb.atime; 
 }
+
+bool ATZeroMany(int nop){
+	int temp = 0;
+	for(int i=0;i<nop;i++){
+		if(PSJFa[i].atime==0);
+		temp ++;
+	}	
+	return (temp>1);
+}
+
 void PSJFdisplay(int nop,int qt){
 	int k=0,f=0,r=0,q=0;
     int n=nop;
     sort(PSJFa,PSJFa+n,PSJFatimeSort);
+    
+    //sort for arriv. time = 0. possible multiple arriv.time=0 with diff burst times
+    if(ATZeroMany(nop)){
+    	PSJFnode* ptr = new PSJFnode();
+        PSJFnode* hold = new PSJFnode();
+    	PSJFnode* swap = new PSJFnode();
+    	ptr = &PSJFa[0]; // point to index 0 as PSJFa already sorted according to arrival time
+    	//ptr hold lowest burst time amount for earliest process in ptr
+    	for (int i = 0; i<nop;i++){	
+    		if((PSJFa[i].atime == 0)&&(PSJFa[i].btime< ptr->btime)){
+			ptr = &PSJFa[i];
+			}
+		}
+		hold =  &PSJFa[0];
+		
+		//swap index 0 with ptr(which holds lowest burst time && lowest arriv time)
+		*swap = *hold;
+		*hold = *ptr;
+		*ptr = *swap;
+	}
+
+	
     int ttime=0,i;
     int j;
     int alltime=0;
     bool moveLast=false;
-    
     //get total of burst time
     for(i=0;i<n;i++){
         alltime+=PSJFa[i].btime;
@@ -71,7 +102,7 @@ void PSJFdisplay(int nop,int qt){
         }
         i=j;
         if(moveLast==true){
-        sort(PSJFb+f,PSJFb+r,PSJFbtimesort);    
+        sort(PSJFb+f,PSJFb+r,PSJFbtimeSort);    
         }
         j=f;
         
