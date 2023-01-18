@@ -1,3 +1,7 @@
-#include "NPSJF.cpp"
-#include "RR.cpp"
-#include "PSJF.cpp"
+#ifndef HEADER
+#define HEADER
+
+#include "algos/NPSJF.cpp"
+#include "algos/RR.cpp"
+#include "algos/PSJF.cpp"
+#endif
