@@ -15,8 +15,8 @@ int main(){
 		NPSJFmain();
 		break;
 		case 2:
-//		system("CLS");
-//		PSJFmain();
+		system("CLS");
+		PSJFmain();
 		break;
 		case 3:
 		system("CLS");

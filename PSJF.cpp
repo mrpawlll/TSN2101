@@ -120,7 +120,7 @@ void PSJFdisplay(int nop,int qt){
     }
     
 
-    
+    int rtime=0;
    
     float averageWaitingTime=0;
     float averageTAT=0;
@@ -152,7 +152,6 @@ void PSJFdisplay(int nop,int qt){
     cout<<"---------------";
     cout<<"\n|Gantt Chart |\n";
     cout<<"---------------\n";
-    int rtime=0;
     //print the boxes first
     for (i=0; i<k; i++){
         if(i!=k)
