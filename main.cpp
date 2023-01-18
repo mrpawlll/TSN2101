@@ -1,22 +1,29 @@
 #include "header.h"
 
 int main(){
-
-//	cout << "\n--------------------------------------";
-//	cout << "\nNon-Preemptive Shortest-Job-First\t";
-//	cout << "\n--------------------------------------\n";
-//	NPSJFmain();
+	int choice;
+	cout << "----------------------"<<endl;
+	cout << "1. Non-preemptive SJF" << endl;
+	cout << "2. Preemptive SJF" << endl;
+	cout << "3. Round-robin" << endl;
+	cout << "----------------------"<<endl;
+	cout << "Enter your choice :";
+	cin >> choice;
+	switch(choice){
+		case 1:
+		system("CLS");
+		NPSJFmain();
+		break;
+		case 2:
+//		system("CLS");
+//		PSJFmain();
+		break;
+		case 3:
+		system("CLS");
+		RRmain();
+		break;
+	}
 	
-	cout << "\n--------------------------------------";
-	cout << "\nPreemptive--Shortest-Job-First\t";
-	cout << "\n--------------------------------------\n";
-	PSJFmain();
-	
-//	cout << "\n--------------------------------------";
-//	cout << "\nRound-Robin\t";
-//	cout << "\n--------------------------------------\n";
-//	RRmain();
-
 	system("pause");
 
 return 0;

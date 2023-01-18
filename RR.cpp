@@ -107,7 +107,25 @@ void RRdisplay(int nop,int qt){
     float averageWaitingTime=0;
     float averageResponseTime=0;
     float averageTAT=0;
-        cout<<"\nGantt Chart\n";
+       
+    cout<<"P.Name  AT\tBT\tCT\tTAT\tWT\n";
+    for (i=0; i<6&&i<nop&&RRa[i].process!='i'; i++){
+        if(RRa[i].process=='\0')
+            break;
+        cout << RRa[i].process << "\t"; 
+        cout << RRa[i].arrival << "\t";
+        cout << RRa[i].burst << "\t";
+        cout << RRa[i].ctime << "\t"; 
+        cout << RRa[i].wait+RRa[i].ctime-rtime+RRa[i].burst << "\t"; 
+        averageTAT+=RRa[i].wait+RRa[i].ctime-rtime+RRa[i].burst;
+        cout << RRa[i].wait+RRa[i].ctime-rtime << "\t"; 
+        averageWaitingTime+=RRa[i].wait+RRa[i].ctime-rtime;
+        cout <<"\n"; 
+    }
+    cout<<"Average Waiting time: "<<(float)averageWaitingTime/(float)n<<endl;
+    cout<<"Average TA time: "<<(float)averageTAT/(float)n<<endl;
+    
+     cout<<"\nGantt Chart\n";
     rtime=0;
     for (i=0; i<k+1&&i<20; i++){
         if(i!=k)
@@ -132,25 +150,6 @@ void RRdisplay(int nop,int qt){
     }
     cout<<"\n";
     cout<<"\n";
-    cout<<"P.Name  AT\tBT\tCT\tTAT\tWT\tRT\n";
-    for (i=0; i<6&&i<nop&&RRa[i].process!='i'; i++){
-        if(RRa[i].process=='\0')
-            break;
-        cout << RRa[i].process << "\t"; 
-        cout << RRa[i].arrival << "\t";
-        cout << RRa[i].burst << "\t";
-        cout << RRa[i].ctime << "\t"; 
-        cout << RRa[i].wait+RRa[i].ctime-rtime+RRa[i].burst << "\t"; 
-        averageTAT+=RRa[i].wait+RRa[i].ctime-rtime+RRa[i].burst;
-        cout << RRa[i].wait+RRa[i].ctime-rtime << "\t"; 
-        averageWaitingTime+=RRa[i].wait+RRa[i].ctime-rtime;
-        cout << RRa[i].restime-RRa[i].arrival << "\t";  
-        averageResponseTime+=RRa[i].restime-RRa[i].arrival;
-        cout <<"\n"; 
-    }
-    cout<<"Average Response time: "<<(float)averageResponseTime/(float)n<<endl;
-    cout<<"Average Waiting time: "<<(float)averageWaitingTime/(float)n<<endl;
-    cout<<"Average TA time: "<<(float)averageTAT/(float)n<<endl;
 }
 void RRmain(){
     int nop,choice,i,qt;
@@ -160,5 +159,6 @@ void RRmain(){
     cin>>qt;
     insertRR(nop);
     RRdisplay(nop,qt);
+    system("pause");
 
 }

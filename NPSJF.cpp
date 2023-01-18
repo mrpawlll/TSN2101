@@ -59,7 +59,7 @@ void output(int e){
     cout<<"\n";
     
     //print table
-    cout<<"P.Name  ATime\tBTime\tCTime\tTATime\tWwTime\tRTime\n";
+    cout<<"P.Name  ATime\tBTime\tCTime\tTATime\tWwTime\n";
     for (i=0; i<e; i++){
         cout << NPSJFa[i].pid << "\t"; 																		//Print Process ID 
         cout <<NPSJFa[i].arrival_time << "\t";																//Print AT
@@ -69,11 +69,14 @@ void output(int e){
         averageTAT+=tStore[i]-NPSJFa[i].arrival_time+NPSJFa[i].burst_time;										//average turnaround time = average turnaround time + tstore - arrival time + burst time
         cout << tStore[i]-NPSJFa[i].arrival_time << "\t"; 													//Print WT
         averageWTime+=tStore[i]-NPSJFa[i].arrival_time;														//average waiting time = average waiting time + tstore - arrival time 
-        cout << tStore[i]-NPSJFa[i].arrival_time << "\t";  													//Print RT
-        averageRTime+=tStore[i]-NPSJFa[i].arrival_time;														//average response time = average response time + tStore - arrival time 
         cout <<"\n"; 
     }
-    cout<<"\n";
+   
+    cout<<"\n\n";
+    cout<<"The Average Waiting time: "<<(float)averageWTime/(float)e<<endl;								//print average waiting time
+    cout<<"The Average Turnaround time: "<<(float)averageTAT/(float)e<<endl;							//print average turnaround time
+    
+     cout<<"\n";
     //print gantt chart
     cout<<"\n\t*****Gantt Chart*****\n";
     cout<<"===============================================\n\n";
@@ -84,10 +87,7 @@ void output(int e){
     for (i=0; i<e+1; i++){
         cout << tStore[i] << "\t"; 																		//Print Burst time of processors 
     }
-    cout<<"\n\n";
-    cout<<"The Average Response time: "<<(float)averageRTime/(float)e<<endl;							//print average response time
-    cout<<"The Average Waiting time: "<<(float)averageWTime/(float)e<<endl;								//print average waiting time
-    cout<<"The Average Turnaround time: "<<(float)averageTAT/(float)e<<endl;							//print average turnaround time
+    
 }
 //Created main body
 void NPSJFmain(){

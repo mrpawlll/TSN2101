@@ -16,10 +16,14 @@ static struct PSJFnode{
 void insertPSJF(int n){
     int i;
     for(i=0;i<n;i++){
+    	cout << "Enter process name:";
         cin>>PSJFa[i].pname; //process number
+    	cout << "Enter burst time:";
         cin>>PSJFa[i].btime; //process burst time
+    	cout << "Enter arrival time:";
         cin>>PSJFa[i].atime; // process arrival time
         PSJFa[i].wtime=-PSJFa[i].atime+1;
+        cout << "\n\n";
     }
 }
 
@@ -67,8 +71,7 @@ void PSJFdisplay(int nop,int qt){
         }
         i=j;
         if(moveLast==true){
-             sort(PSJFb+f,PSJFb+r,PSJFbtimesort);    
-
+        sort(PSJFb+f,PSJFb+r,PSJFbtimesort);    
         }
         j=f;
         
@@ -104,7 +107,6 @@ void PSJFdisplay(int nop,int qt){
     
     //total up burst time for each context switch
     for(i=0;i<k-1;i++){
-    	cout << "PNAME :"<< PSJFc[i].pname << endl;
         if(PSJFc[i].pname==PSJFc[i+1].pname){
 
 			PSJFc[i+1].btime;
@@ -119,7 +121,34 @@ void PSJFdisplay(int nop,int qt){
     
 
     
-    // k == number of times process switches
+   
+    float averageWaitingTime=0;
+    float averageTAT=0;
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"+---------------+---------------+---------------+---------------+---------------+---------------+\n";
+    cout<<"|\tP.Name\t|\tArriv.T\t|\tBurst.T\t|\tExit.T\t|Turnaround.T\t|Waiting.T\t|\n";
+    cout<<"+---------------+---------------+---------------+---------------+---------------+---------------+\n";
+    for (i=0; i<nop&&PSJFa[i].pname!='i'; i++){
+        if(PSJFa[i].pname=='\0')
+            break;
+        cout<<"|\t" <<'P'<< PSJFa[i].pname << "\t"; 
+        cout<<"|\t"<< PSJFa[i].atime << "\t";
+        cout<<"|\t" << PSJFa[i].btime << "\t";
+        cout<<"|\t" << PSJFa[i].ctime << "\t"; 
+        
+        cout<<"|\t"<< PSJFa[i].wtime+PSJFa[i].ctime-rtime+PSJFa[i].btime << "\t"; 
+        averageTAT+=PSJFa[i].wtime+PSJFa[i].ctime-rtime+PSJFa[i].btime;
+        
+        cout<<"|\t"<< PSJFa[i].wtime+PSJFa[i].ctime-rtime << "\t|"; 
+        averageWaitingTime+=PSJFa[i].wtime+PSJFa[i].ctime-rtime;
+        cout <<"\n"; 
+    }
+    cout<<"+---------------+---------------+---------------+---------------+---------------+---------------+\n";
+    cout<<"Average waiting time: "<<(float)averageWaitingTime/(float)n<<endl;
+    cout<<"Average turnaround time: "<<(float)averageTAT/(float)n<<endl;
+    
+     // k == number of times process switches
     cout<<"---------------";
     cout<<"\n|Gantt Chart |\n";
     cout<<"---------------\n";
@@ -147,37 +176,11 @@ void PSJFdisplay(int nop,int qt){
     }
     
     
-    float averageWaitingTime=0;
-    float averageTAT=0;
-    cout<<"\n";
-    cout<<"\n";
-    cout<<"+---------------+---------------+---------------+---------------+---------------+---------------+\n";
-    cout<<"|\tP.Name\t|\tArriv.T\t|\tBurst.T\t|\tExit.T\t|Turnaround.T\t|Waiting.T\t|\n";
-    cout<<"+---------------+---------------+---------------+---------------+---------------+---------------+\n";
-    for (i=0; i<nop&&PSJFa[i].pname!='i'; i++){
-        if(PSJFa[i].pname=='\0')
-            break;
-        cout<<"|\t" <<'P'<< PSJFa[i].pname << "\t"; 
-        cout<<"|\t"<< PSJFa[i].atime << "\t";
-        cout<<"|\t" << PSJFa[i].btime << "\t";
-        cout<<"|\t" << PSJFa[i].ctime << "\t"; 
-        
-        cout<<"|\t"<< PSJFa[i].wtime+PSJFa[i].ctime-rtime+PSJFa[i].btime << "\t"; 
-        averageTAT+=PSJFa[i].wtime+PSJFa[i].ctime-rtime+PSJFa[i].btime;
-        
-        cout<<"|\t"<< PSJFa[i].wtime+PSJFa[i].ctime-rtime << "\t|"; 
-        averageWaitingTime+=PSJFa[i].wtime+PSJFa[i].ctime-rtime;
-        cout <<"\n"; 
-    }
-    cout<<"+---------------+---------------+---------------+---------------+---------------+---------------+\n";
-    cout<<"Average waiting time: "<<(float)averageWaitingTime/(float)n<<endl;
-    cout<<"Average turnaround time: "<<(float)averageTAT/(float)n<<endl;
 }
 void PSJFmain(){
     int nop,choice,i,qt;
-    cout<<"Enter number of processes\n";
+    cout<<"Number of processes : ";
     cin>>nop;
-    cout<<"Enter process, burst time and arrival time in that order\n";
     insertPSJF(nop);
     PSJFdisplay(nop,1);
 }
