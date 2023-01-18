@@ -14,21 +14,26 @@ int main(){
 		case 1:
 		system("CLS");
 		NPSJFmain();
-
+		cout<<"\n";
 		break;
+		
 		case 2:
 		system("CLS");
 		PSJFmain();
+		cout<<"\n";
 		break;
+		
 		case 3:
 		system("CLS");
 		RRmain();
+		cout<<"\n";
 		break;
 	}	
 	system("pause");
 	system("CLS");
 		
 	}while(choice!=0);
+	
 	
 return 0;
 }
