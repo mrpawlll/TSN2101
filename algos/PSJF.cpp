@@ -36,7 +36,7 @@ bool PSJFatimeSort(PSJFnode PSJFa,PSJFnode PSJFb){
     return PSJFa.atime < PSJFb.atime; 
 }
 
-bool ATZeroMany(int nop){
+bool ArrivalZeroMany(int nop){
 	int temp = 0;
 	for(int i=0;i<nop;i++){
 		if(PSJFa[i].atime==0);
@@ -51,7 +51,7 @@ void PSJFdisplay(int nop,int qt){
     sort(PSJFa,PSJFa+n,PSJFatimeSort);
     
     //sort for arriv. time = 0. possible multiple arriv.time=0 with diff burst times
-    if(ATZeroMany(nop)){
+    if(ArrivalZeroMany(nop)){
     	PSJFnode* ptr = new PSJFnode();
         PSJFnode* hold = new PSJFnode();
     	PSJFnode* swap = new PSJFnode();

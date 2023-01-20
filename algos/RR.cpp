@@ -29,10 +29,39 @@ bool atimeSort(RRnode RRa,RRnode RRb){
     return RRa.arrival < RRb.arrival; 
 }
 
+bool ATZeroMany(int nop){
+	int temp = 0;
+	for(int i=0;i<nop;i++){
+		if(RRa[i].arrival==0);
+		temp ++;
+	}	
+	return (temp>1);
+}
+
 void RRdisplay(int nop,int qt){
 	int k=0,f=0,r=0;
     int n=nop,q;
     sort(RRa,RRa+n,atimeSort);
+        //sort for arriv. time = 0. possible multiple arriv.time=0 with diff burst times
+    if(ATZeroMany(nop)){
+    	RRnode* ptr = new RRnode();
+        RRnode* hold = new RRnode();
+    	RRnode* swap = new RRnode();
+    	ptr = &RRa[0]; // point to index 0 as RRa already sorted according to arrival time
+    	//ptr hold lowest burst time amount for earliest process in ptr
+    	for (int i = 0; i<nop;i++){	
+    		if((RRa[i].arrival == 0)&&(RRa[i].burst< ptr->burst)){
+			ptr = &RRa[i];
+			}
+		}
+		hold =  &RRa[0];
+		
+		//swap index 0 with ptr(which holds lowest burst time && lowest arriv time)
+		*swap = *hold;
+		*hold = *ptr;
+		*ptr = *swap;
+	}
+    
     int ttime=0,i;
     int j,tArray[n];
     int alltime=0;
